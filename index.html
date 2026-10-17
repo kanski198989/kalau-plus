@@ -1,0 +1,335 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Kalau Plus — строительно-дорожная компания, Актобе</title>
+<meta name="description" content="ТОО «Kalau Plus»: содержание и ремонт дорог, благоустройство, уличное освещение, электросети и ЛЭП, водоснабжение, ремонт зданий. Актюбинская область, с 2017 года. 60+ выполненных договоров.">
+<meta name="theme-color" content="#25282c">
+<meta property="og:title" content="ТОО «Kalau Plus» — строительно-дорожная компания">
+<meta property="og:description" content="Дороги, благоустройство и инженерные сети в Актюбинской области с 2017 года.">
+<meta property="og:image" content="img/hero.jpg">
+<link rel="icon" href="img/logo.png">
+<link rel="apple-touch-icon" href="img/logo-512.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Oswald:wght@500;600;700&family=Golos+Text:wght@400;500;600&display=swap">
+<style>
+/* Layout: dark split hero with site photo (from the company deck), asphalt divider, KPI band, directions with photos, advantages, project ledger, filterable photo gallery, awards, contacts */
+:root{
+  --ink:#1c1f23; --char:#25282c; --char-2:#2f3338; --paper:#f5f4f1; --white:#ffffff; --muted:#5f646b; --line:#e0ddd7;
+  --orange:#e8782a; --orange-deep:#c95f14; --orange-soft:#fbe9dc;
+  --display:"Oswald","Arial Narrow",Impact,sans-serif; --body:"Golos Text",system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;
+  color-scheme:light;
+}
+*{box-sizing:border-box}
+[hidden]{display:none!important}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--body);font-size:16px;line-height:1.55}
+img{max-width:100%;display:block}
+a{color:inherit}
+.wrap{max-width:1160px;margin:0 auto;padding-left:max(18px,env(safe-area-inset-left,0px));padding-right:max(18px,env(safe-area-inset-right,0px))}
+h1,h2,h3{font-family:var(--display);font-weight:600;line-height:1.1;margin:0;text-wrap:balance;letter-spacing:.005em}
+:focus-visible{outline:3px solid var(--orange);outline-offset:2px}
+.eyebrow{display:inline-block;font-size:13px;font-weight:600;letter-spacing:.09em;text-transform:uppercase;color:var(--orange-deep)}
+section[id]{scroll-margin-top:64px}
+
+.top{position:sticky;top:0;z-index:30;background:var(--char);color:#fff}
+.top .wrap{display:flex;align-items:center;gap:14px;padding-block:9px}
+.logo{display:flex;align-items:center;gap:10px;text-decoration:none;flex:0 1 auto;min-width:0}
+.logo img{width:42px;height:42px;border-radius:50%;flex:none}
+.logo span{min-width:0}
+.logo b{display:block;font-family:var(--display);font-size:19px;font-weight:700;letter-spacing:.05em;text-transform:uppercase;line-height:1}
+.logo small{display:block;font-size:11px;color:#b9bcc0;margin-top:3px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.menu{display:flex;gap:2px;margin-left:auto}
+.menu a{text-decoration:none;font-weight:500;font-size:15px;padding:8px 10px;border-radius:8px;color:#e9eaeb}
+.menu a:hover{background:var(--char-2)}
+.langs{display:flex;border:1px solid #474b51;border-radius:10px;overflow:hidden;flex:none}
+.langs button{font:inherit;font-size:13px;font-weight:600;border:0;background:none;padding:7px 10px;cursor:pointer;color:#c9ccd0}
+.langs button[aria-pressed="true"]{background:var(--orange);color:#fff}
+@media (max-width:960px){.menu{display:none}.langs{margin-left:auto}}
+@media (max-width:420px){.logo small{display:none}}
+
+.hero{background:var(--char);color:#fff}
+.hero-grid{display:grid;grid-template-columns:1fr 1fr;align-items:stretch}
+.hero-text{padding:64px 48px 56px max(18px,calc((100vw - 1160px)/2 + 18px));display:flex;flex-direction:column;justify-content:center}
+.hero-text .eyebrow{color:var(--orange)}
+.hero h1{font-size:clamp(36px,5.2vw,64px);text-transform:uppercase;margin-top:14px}
+.hero p.lead{font-size:clamp(16px,1.5vw,19px);color:#c9ccd0;max-width:52ch;margin:18px 0 28px}
+.hero-photo{position:relative;min-height:380px;background:#3a3d42}
+.hero-photo img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.hero-photo::before{content:"";position:absolute;left:0;top:0;bottom:0;width:6px;background:var(--orange);z-index:1}
+.ctas{display:flex;flex-wrap:wrap;gap:10px}
+.btn{display:inline-flex;align-items:center;gap:8px;text-decoration:none;font-weight:600;padding:13px 20px;border-radius:12px;font-size:16px;border:0;cursor:pointer;font-family:inherit}
+.btn svg{width:20px;height:20px;flex:none}
+.btn.primary{background:var(--orange);color:#fff}
+.btn.primary:hover{background:var(--orange-deep)}
+.btn.ghost{background:transparent;color:#fff;box-shadow:inset 0 0 0 1px #5a5e64}
+.btn.ghost:hover{box-shadow:inset 0 0 0 1px #fff}
+@media (max-width:860px){.hero-grid{grid-template-columns:1fr}.hero-text{padding:40px max(18px,env(safe-area-inset-right,0px)) 36px max(18px,env(safe-area-inset-left,0px))}.hero-photo{min-height:0;aspect-ratio:4/3}.hero-photo::before{width:auto;height:6px;right:0;bottom:auto}}
+
+.road{height:42px;background:#2b2e31;position:relative;overflow:hidden}
+.road::before{content:"";position:absolute;left:0;right:-82px;top:50%;height:5px;margin-top:-2.5px;background:repeating-linear-gradient(90deg,#f1f0ec 0 46px,transparent 46px 82px)}
+.road::after{content:"";position:absolute;left:0;right:0;top:5px;bottom:5px;border-top:3px solid var(--orange);border-bottom:3px solid #f1f0ec;opacity:.85}
+@media (prefers-reduced-motion:no-preference){.road::before{animation:drive 2.4s linear infinite}@keyframes drive{to{transform:translateX(-82px)}}}
+
+.kpis{background:var(--white);border-bottom:1px solid var(--line)}
+.kpis .wrap{display:grid;grid-template-columns:repeat(4,1fr)}
+.kpi{padding:26px 20px;border-left:1px solid var(--line)}
+.kpi:first-child{border-left:0;padding-left:0}
+.kpi b{display:block;font-family:var(--display);font-size:clamp(34px,4vw,48px);font-weight:700;color:var(--orange-deep);line-height:1}
+.kpi span{display:block;color:var(--muted);margin-top:8px;font-size:15px}
+@media (max-width:760px){.kpis .wrap{grid-template-columns:1fr 1fr}.kpi{padding:18px 14px}.kpi:nth-child(odd){border-left:0;padding-left:0}.kpi:nth-child(n+3){border-top:1px solid var(--line)}}
+
+section.block{padding-block:76px}
+.shead{display:flex;flex-direction:column;gap:10px;margin-bottom:32px;max-width:760px}
+.shead h2{font-size:clamp(28px,3.6vw,44px);text-transform:uppercase}
+.shead p{margin:0;color:var(--muted);font-size:17px}
+.about{display:grid;grid-template-columns:1.1fr .9fr;gap:40px;align-items:start}
+.about p{margin:0 0 14px;font-size:17px;max-width:62ch}
+.geo{display:flex;flex-wrap:wrap;gap:8px;margin-top:6px}
+.geo span{background:var(--white);border:1px solid var(--line);border-radius:20px;padding:6px 12px;font-size:14px;font-weight:500}
+.lic{background:var(--char);color:#fff;border-radius:16px;padding:24px;display:flex;flex-direction:column;gap:14px}
+.lic h3{font-size:22px;text-transform:uppercase}
+.lic dl{margin:0;display:grid;grid-template-columns:auto 1fr;gap:8px 16px;font-size:15px}
+.lic dt{color:#a9adb2} .lic dd{margin:0;font-weight:500}
+.lic p{margin:0;color:#c9ccd0;font-size:14px;border-top:1px solid #3d4146;padding-top:14px}
+@media (max-width:860px){.about{grid-template-columns:1fr;gap:24px}}
+@media (max-width:420px){.lic dl{grid-template-columns:1fr;gap:2px}.lic dd{margin-bottom:8px}}
+
+.dirs{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+.dir{background:var(--white);border-radius:16px;overflow:hidden;border:1px solid var(--line);display:flex;flex-direction:column;min-width:0}
+.dir .ph{aspect-ratio:4/3;background:#d9d6d0;overflow:hidden}
+.dir .ph img{width:100%;height:100%;object-fit:cover}
+.dir .tx{padding:18px 20px 20px;display:flex;flex-direction:column;gap:8px}
+.dir h3{font-size:22px;text-transform:uppercase}
+.dir p{margin:0;color:var(--muted);font-size:15px}
+.dir.hl{border-color:var(--orange);box-shadow:0 0 0 1px var(--orange)}
+@media (max-width:900px){.dirs{grid-template-columns:repeat(2,1fr)}}
+@media (max-width:560px){.dirs{grid-template-columns:1fr}}
+
+.dark{background:var(--char);color:#eeeeec}
+.dark .eyebrow{color:var(--orange)}
+.advs{display:grid;grid-template-columns:repeat(3,1fr);gap:28px 22px}
+.adv{border-top:3px solid var(--orange);padding-top:14px}
+.adv h3{font-size:21px;text-transform:uppercase;margin-bottom:6px}
+.adv p{margin:0;color:#bfc3c7;font-size:15px}
+@media (max-width:860px){.advs{grid-template-columns:repeat(2,1fr)}}
+@media (max-width:520px){.advs{grid-template-columns:1fr}}
+
+.pgroup{margin-bottom:34px}
+.pgroup:last-child{margin-bottom:0}
+.pgroup h3{font-size:18px;text-transform:uppercase;color:var(--muted);margin-bottom:10px;letter-spacing:.03em}
+.plist{background:var(--white);border:1px solid var(--line);border-radius:16px;overflow:hidden}
+.prow{display:grid;grid-template-columns:1fr auto auto;gap:4px 24px;align-items:center;padding:16px 20px;border-top:1px solid var(--line)}
+.prow:first-child{border-top:0}
+.prow b{font-weight:600;font-size:16px;display:block}
+.prow small{display:block;color:var(--muted);font-size:14px;margin-top:2px}
+.prow .yr{font-variant-numeric:tabular-nums;color:var(--muted);font-weight:500;white-space:nowrap}
+.prow .sum{font-family:var(--display);font-weight:600;font-size:20px;white-space:nowrap;text-align:right;min-width:130px;font-variant-numeric:tabular-nums}
+@media (max-width:640px){.prow{grid-template-columns:1fr auto;padding:14px 16px}.prow>div{grid-column:1 / -1}.prow .yr{grid-column:1}.prow .sum{grid-column:2;min-width:0;font-size:18px}}
+
+.chips{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:18px}
+.chips button{font:inherit;font-size:14px;font-weight:600;border:1px solid var(--line);background:var(--white);border-radius:20px;padding:8px 14px;cursor:pointer;color:var(--ink)}
+.chips button[aria-pressed="true"]{background:var(--char);color:#fff;border-color:var(--char)}
+.gal{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}
+.gal figure{margin:0;background:var(--white);border:1px solid var(--line);border-radius:14px;overflow:hidden;cursor:zoom-in;display:flex;flex-direction:column;min-width:0}
+.gal .ph{aspect-ratio:4/3;overflow:hidden;background:#d9d6d0}
+.gal img{width:100%;height:100%;object-fit:cover;transition:transform .3s}
+.gal figure:hover img{transform:scale(1.04)}
+.gal figcaption{padding:10px 12px;font-size:14px;font-weight:500;line-height:1.35}
+@media (max-width:900px){.gal{grid-template-columns:repeat(3,1fr)}}
+@media (max-width:640px){.gal{grid-template-columns:repeat(2,1fr);gap:8px}.gal figcaption{font-size:13px;padding:8px 10px}}
+.lb{position:fixed;inset:0;z-index:50;background:rgb(15 16 18/.93);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:12px;padding:calc(64px + env(safe-area-inset-top,0px)) max(16px,env(safe-area-inset-right,0px)) calc(24px + env(safe-area-inset-bottom,0px)) max(16px,env(safe-area-inset-left,0px))}
+.lb img{max-height:78vh;max-width:100%;border-radius:10px;object-fit:contain}
+.lb p{color:#fff;margin:0;text-align:center;font-weight:500;max-width:60ch}
+.lb button{position:absolute;background:rgb(255 255 255/.14);color:#fff;border:0;width:46px;height:46px;border-radius:50%;font-size:26px;cursor:pointer}
+.lb .close{top:calc(12px + env(safe-area-inset-top,0px));right:max(12px,env(safe-area-inset-right,0px))}
+.lb .prev{left:max(8px,env(safe-area-inset-left,0px));top:50%} .lb .next{right:max(8px,env(safe-area-inset-right,0px));top:50%}
+
+.awards{display:grid;grid-template-columns:repeat(4,1fr);gap:14px}
+.award{background:var(--white);border:1px solid var(--line);border-radius:14px;overflow:hidden;display:flex;flex-direction:column;cursor:zoom-in;min-width:0}
+.award .ph{aspect-ratio:4/3;background:#ece9e4;overflow:hidden}
+.award img{width:100%;height:100%;object-fit:contain}
+.award .t{padding:10px 12px 12px;font-size:14px;line-height:1.35}
+.award .y{display:block;color:var(--orange-deep);font-weight:600;font-size:13px;margin-top:4px}
+@media (max-width:900px){.awards{grid-template-columns:repeat(2,1fr)}}
+
+.steps{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;counter-reset:s}
+.step{background:var(--white);border:1px solid var(--line);border-radius:14px;padding:18px}
+.step::before{counter-increment:s;content:counter(s);font-family:var(--display);font-size:40px;font-weight:700;color:var(--orange);line-height:1;display:block;margin-bottom:8px}
+.step h3{font-size:19px;text-transform:uppercase;margin-bottom:6px}
+.step p{margin:0;color:var(--muted);font-size:15px}
+@media (max-width:860px){.steps{grid-template-columns:repeat(2,1fr)}}
+@media (max-width:460px){.steps{grid-template-columns:1fr}}
+
+.contact{display:grid;grid-template-columns:1.1fr .9fr;gap:18px;align-items:start}
+.ccard{background:var(--white);border:1px solid var(--line);border-radius:16px;padding:24px;display:flex;flex-direction:column;gap:18px;min-width:0}
+.crow{display:grid;grid-template-columns:28px 1fr;gap:12px;align-items:start}
+.crow svg{width:24px;height:24px;color:var(--orange-deep);margin-top:2px}
+.crow small{display:block;color:var(--muted);font-size:13px;font-weight:500}
+.crow a,.crow span{font-size:18px;font-weight:600;text-decoration:none;overflow-wrap:anywhere}
+.crow a:hover{color:var(--orange-deep);text-decoration:underline}
+.maps{display:flex;gap:12px;flex-wrap:wrap;margin-top:6px}
+.maps a{font-size:14px;font-weight:600;color:var(--orange-deep)}
+.ccard .btn.ghost{color:var(--ink);box-shadow:inset 0 0 0 1px var(--line)}
+.req h3{font-size:20px;text-transform:uppercase}
+.req dl{margin:0;display:grid;grid-template-columns:auto 1fr;gap:10px 16px;font-size:15px}
+.req dt{color:var(--muted)} .req dd{margin:0;font-weight:500;overflow-wrap:anywhere}
+@media (max-width:860px){.contact{grid-template-columns:1fr}}
+@media (max-width:420px){.req dl{grid-template-columns:1fr;gap:2px}.req dd{margin-bottom:8px}}
+footer{background:var(--char);color:#a9adb2;padding-block:22px 28px;font-size:14px}
+footer .wrap{display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap}
+</style>
+</head>
+<body>
+
+<header class="top">
+  <div class="wrap">
+    <a class="logo" href="#top"><img src="img/logo.png" alt="" width="42" height="42"><span><b>Kalau Plus</b><small data-i="tag">Строительно-дорожная компания</small></span></a>
+    <nav class="menu" aria-label="Меню">
+      <a href="#about" data-i="nav_about">О компании</a><a href="#dirs" data-i="nav_dirs">Направления</a><a href="#projects" data-i="nav_projects">Объекты</a><a href="#gallery" data-i="nav_gallery">Фото</a><a href="#contacts" data-i="nav_contacts">Контакты</a>
+    </nav>
+    <div class="langs" role="group" aria-label="Тіл / Язык / Language"><button data-lang="kk">ҚАЗ</button><button data-lang="ru">РУС</button><button data-lang="en">ENG</button></div>
+  </div>
+</header>
+
+<main id="top">
+  <section class="hero">
+    <div class="hero-grid">
+      <div class="hero-text">
+        <span class="eyebrow" data-i="hero_eyebrow">ТОО «Kalau Plus» · с 2017 года</span>
+        <h1 data-i="hero_title">Строительно-дорожная компания</h1>
+        <p class="lead" data-i="hero_lead">Содержание и ремонт дорог, благоустройство, уличное освещение, электросети и ЛЭП, водоснабжение. Актюбинская область и другие регионы Казахстана.</p>
+        <div class="ctas">
+          <a class="btn primary" href="tel:+77028110504"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"><path d="M5 3h4l2 5-2.5 1.5a11 11 0 0 0 6 6L16 13l5 2v4a2 2 0 0 1-2 2A16 16 0 0 1 3 5a2 2 0 0 1 2-2"/></svg><span data-i="cta_call">Позвонить</span></a>
+          <a class="btn ghost" href="https://wa.me/77028110504" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"><path d="M4 20l1.3-3.9A8.5 8.5 0 1 1 8 19z"/></svg><span data-i="cta_wa">WhatsApp</span></a>
+        </div>
+      </div>
+      <div class="hero-photo"><img src="img/hero.jpg" alt="" data-ialt="hero_alt" fetchpriority="high"></div>
+    </div>
+  </section>
+  <div class="road" aria-hidden="true"></div>
+
+  <div class="kpis">
+    <div class="wrap">
+      <div class="kpi"><b id="years">9</b><span id="yearsLbl">лет работы (с 2017)</span></div>
+      <div class="kpi"><b>60+</b><span data-i="k2">исполненных государственных и коммерческих договоров</span></div>
+      <div class="kpi"><b>9</b><span data-i="k3">направлений деятельности</span></div>
+      <div class="kpi"><b>6</b><span data-i="k4">областей Казахстана</span></div>
+    </div>
+  </div>
+
+  <section class="block" id="about">
+    <div class="wrap">
+      <div class="shead"><span class="eyebrow" data-i="about_eyebrow">О компании</span><h2 data-i="about_title">Дороги, благоустройство и инженерные сети под ключ</h2></div>
+      <div class="about">
+        <div>
+          <p data-i="about_p1">ТОО «Kalau Plus» работает с 2017 года.</p>
+          <p data-i="about_p2"></p>
+          <div class="geo"><span data-i="geo1">Актюбинская область</span><span data-i="geo2">Костанайская область</span><span data-i="geo3">Кызылординская область</span><span data-i="geo4">и другие регионы РК</span></div>
+        </div>
+        <div class="lic">
+          <h3 data-i="lic_title">Государственная лицензия</h3>
+          <dl>
+            <dt data-i="lic_no">Номер</dt><dd>ГСЛ №03831</dd>
+            <dt data-i="lic_date">Дата выдачи</dt><dd>16.10.2017</dd>
+            <dt data-i="lic_kind">Вид деятельности</dt><dd data-i="lic_kind_v">Строительно-монтажные работы</dd>
+            <dt data-i="lic_cat">Категория</dt><dd data-i="lic_cat_v">II категория</dd>
+            <dt data-i="lic_by">Лицензиар</dt><dd data-i="lic_by_v">Управление государственного архитектурно-строительного контроля г. Астаны</dd>
+          </dl>
+          <p data-i="lic_note"></p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="block" id="dirs" style="padding-top:0">
+    <div class="wrap">
+      <div class="shead"><span class="eyebrow" data-i="dirs_eyebrow">Направления</span><h2 data-i="dirs_title">Что мы делаем</h2></div>
+      <div class="dirs" id="dirsGrid"></div>
+    </div>
+  </section>
+
+  <section class="block dark" id="adv">
+    <div class="wrap">
+      <div class="shead"><span class="eyebrow" data-i="adv_eyebrow">Почему мы</span><h2 data-i="adv_title">Преимущества работы с компанией</h2></div>
+      <div class="advs" id="advGrid"></div>
+    </div>
+  </section>
+
+  <section class="block" id="projects">
+    <div class="wrap">
+      <div class="shead"><span class="eyebrow" data-i="pr_eyebrow">Объекты</span><h2 data-i="pr_title">Выполненные проекты</h2><p data-i="pr_sub"></p></div>
+      <div id="projGroups"></div>
+    </div>
+  </section>
+
+  <section class="block" id="gallery" style="padding-top:0">
+    <div class="wrap">
+      <div class="shead"><span class="eyebrow" data-i="g_eyebrow">Фото</span><h2 data-i="g_title">Наши работы на объектах</h2></div>
+      <div class="chips" id="chips" role="group"></div>
+      <div class="gal" id="gal"></div>
+    </div>
+  </section>
+
+  <section class="block" id="awards" style="padding-top:0">
+    <div class="wrap">
+      <div class="shead"><span class="eyebrow" data-i="aw_eyebrow">Признание</span><h2 data-i="aw_title">Благодарственные письма и сертификаты</h2></div>
+      <div class="awards" id="awGrid"></div>
+    </div>
+  </section>
+
+  <section class="block" id="process" style="padding-top:0">
+    <div class="wrap">
+      <div class="shead"><span class="eyebrow" data-i="proc_eyebrow">Как работаем</span><h2 data-i="proc_title">От заявки до сдачи объекта</h2></div>
+      <div class="steps">
+        <div class="step"><h3 data-i="p1_t">Заявка</h3><p data-i="p1_d"></p></div>
+        <div class="step"><h3 data-i="p2_t">Выезд и смета</h3><p data-i="p2_d"></p></div>
+        <div class="step"><h3 data-i="p3_t">Договор</h3><p data-i="p3_d"></p></div>
+        <div class="step"><h3 data-i="p4_t">Работы и сдача</h3><p data-i="p4_d"></p></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="block" id="contacts" style="padding-top:0">
+    <div class="wrap">
+      <div class="shead"><span class="eyebrow" data-i="ct_eyebrow">Контакты</span><h2 data-i="ct_title">Обсудим ваш объект</h2></div>
+      <div class="contact">
+        <div class="ccard">
+          <div class="crow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"><path d="M5 3h4l2 5-2.5 1.5a11 11 0 0 0 6 6L16 13l5 2v4a2 2 0 0 1-2 2A16 16 0 0 1 3 5a2 2 0 0 1 2-2"/></svg>
+            <div><small data-i="ct_phone">Телефон</small><a href="tel:+77028110504">+7 702 811 05 04</a><br><a href="tel:+77770890040">+7 777 089 00 40</a></div></div>
+          <div class="crow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 7 9 6 9-6"/></svg>
+            <div><small data-i="ct_email">Электронная почта</small><a href="mailto:tookalauplus@mail.ru">tookalauplus@mail.ru</a></div></div>
+          <div class="crow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"><path d="M12 21s-7-6.5-7-12a7 7 0 0 1 14 0c0 5.5-7 12-7 12z"/><circle cx="12" cy="9" r="2.5"/></svg>
+            <div><small data-i="ct_addr">Адрес</small><span data-i="addr">030700, г. Актобе, ул. Маресьева, 105, офис 301</span>
+              <div class="maps"><a href="https://2gis.kz/aktobe/search/%D0%9C%D0%B0%D1%80%D0%B5%D1%81%D1%8C%D0%B5%D0%B2%D0%B0%20105" target="_blank" rel="noopener" data-i="map_2gis">Открыть в 2ГИС</a><a href="https://www.google.com/maps/search/?api=1&amp;query=%D0%90%D0%BA%D1%82%D0%BE%D0%B1%D0%B5%2C%20%D1%83%D0%BB.%20%D0%9C%D0%B0%D1%80%D0%B5%D1%81%D1%8C%D0%B5%D0%B2%D0%B0%20105" target="_blank" rel="noopener" data-i="map_google">Google Карты</a></div></div></div>
+          <div class="ctas"><a class="btn primary" href="https://wa.me/77028110504" target="_blank" rel="noopener"><span data-i="cta_wa2">Написать в WhatsApp</span></a><a class="btn ghost" href="tel:+77028110504"><span data-i="cta_call">Позвонить</span></a></div>
+        </div>
+        <div class="ccard req">
+          <h3 data-i="req_title">Реквизиты</h3>
+          <dl>
+            <dt data-i="req_name">Наименование</dt><dd data-i="req_name_v">ТОО «Kalau Plus»</dd>
+            <dt data-i="req_bin">БИН</dt><dd>100240003140</dd>
+            <dt data-i="req_dir">Директор</dt><dd data-i="req_dir_v">Айбосынов Канат Болатбекович</dd>
+            <dt data-i="req_lic">Лицензия</dt><dd data-i="req_lic_v">ГСЛ №03831 от 16.10.2017, II категория</dd>
+          </dl>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer><div class="wrap"><span data-i="foot">© ТОО «Kalau Plus». Актобе, Казахстан</span><span>tookalauplus@mail.ru · +7 702 811 05 04</span></div></footer>
+
+<div class="lb" id="lb" hidden role="dialog" aria-modal="true">
+  <button class="close" id="lbClose" aria-label="Закрыть">×</button>
+  <button class="prev" id="lbPrev" aria-label="Назад">‹</button>
+  <img id="lbImg" alt="">
+  <p id="lbCap"></p>
+  <button class="next" id="lbNext" aria-label="Вперёд">›</button>
+</div>
+
+<script src="content.js"></script>
+</body>
+</html>
