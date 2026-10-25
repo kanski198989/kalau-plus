@@ -1,13 +1,20 @@
-САЙТ ТОО «KALAU PLUS» — как выложить на GitHub Pages
-====================================================
-В архиве: index.html, content.js и папка img (фото и логотип).
+САЙТ ТОО «KALAU PLUS» — обновление на GitHub Pages
+==================================================
+В архиве: index.html, папка img (фото, логотип, лицензия, награды) и этот файл.
 
-1. github.com → «+» → New repository → название: kalau-plus → Public → Create repository.
-2. Нажмите «uploading an existing file».
-3. Перетащите в окно ВСЁ сразу: index.html, content.js, README.txt и ПАПКУ img целиком
-   (папку можно перетаскивать прямо из проводника). Дождитесь загрузки → Commit changes.
-4. Settings → Pages → Branch: main, / (root) → Save.
-5. Через 1–2 минуты сайт будет по адресу:
-   https://kanski198989.github.io/kalau-plus/
+Сайт уже работает по адресу https://kanski198989.github.io/kalau-plus/
+Чтобы заменить старую версию новой:
 
-Тексты на трёх языках лежат в файле content.js — их можно править в любом блокноте.
+1. Откройте github.com/kanski198989/kalau-plus
+2. Add file → Upload files.
+3. Перетащите в окно index.html, README.txt и ПАПКУ img целиком.
+   Старый index.html заменится новым. Commit changes.
+4. (По желанию) удалите старый файл content.js: откройте его → «…» → Delete file → Commit.
+   Новый сайт его не использует, старые фото в img тоже можно не трогать.
+5. Через 1–2 минуты обновите страницу сайта (на телефоне — потяните вниз).
+
+Язык можно открыть сразу по ссылке:
+  .../kalau-plus/#kz   .../kalau-plus/#ru   .../kalau-plus/#en
+
+Тексты на трёх языках лежат в index.html, в блоке «const T = {» и ниже —
+их можно править в любом блокноте (ru — русский, kz — казахский, en — английский).
