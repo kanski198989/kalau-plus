@@ -1,0 +1,651 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<link rel="icon" href="img/logo.jpg">
+<meta property="og:title" content="ТОО «Kalau Plus»">
+<meta property="og:description" content="Строительство, ремонт и содержание дорог, благоустройство и инженерные сети в Актюбинской области.">
+<meta property="og:image" content="img/road_finished.jpg">
+<title>Kalau Plus</title>
+<meta name="description" content="ТОО «Kalau Plus» — строительство, ремонт и содержание дорог, благоустройство и инженерные сети в Актюбинской области с 2018 года.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Unbounded:wght@500;700&family=Golos+Text:wght@400;500;600&family=JetBrains+Mono:wght@500&display=swap">
+<style>
+/* Layout: asphalt bands and concrete sections, separated by a dashed road-marking rule; figures set like kilometre posts. */
+:root{
+  --bg:#eef0ed; --surface:#ffffff; --fg:#16191b; --muted:#59605c; --line:#d2d6d1;
+  --asphalt:#1b1e21; --asphalt-2:#272b2f; --on-asphalt:#eef0ec; --on-asphalt-muted:#a8afaa;
+  --marking:#f0b400; --on-marking:#16191b; --link:#8a6400;
+  --f-display:"Unbounded","Golos Text",system-ui,sans-serif;
+  --f-body:"Golos Text",system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;
+  --f-mono:"JetBrains Mono",ui-monospace,Menlo,Consolas,monospace;
+  --gut-l:max(16px,env(safe-area-inset-left,0px)); --gut-r:max(16px,env(safe-area-inset-right,0px));
+}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
+  --bg:#111315; --surface:#1a1d20; --fg:#e7e9e5; --muted:#9ba29d; --line:#2c3135;
+  --asphalt:#0b0c0d; --asphalt-2:#1c1f22; --link:#f0b400; color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#111315; --surface:#1a1d20; --fg:#e7e9e5; --muted:#9ba29d; --line:#2c3135;
+  --asphalt:#0b0c0d; --asphalt-2:#1c1f22; --link:#f0b400; color-scheme:dark}
+
+*{box-sizing:border-box}
+[hidden]{display:none!important}
+html{scroll-behavior:smooth;scroll-padding-top:80px}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}*{transition:none!important;animation:none!important}}
+html,body{margin:0}
+img{max-width:100%}
+body{background:var(--bg);color:var(--fg);font:16px/1.6 var(--f-body);-webkit-font-smoothing:antialiased}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:60;background:var(--asphalt)}
+h1,h2,h3{font-family:var(--f-display);font-weight:700;line-height:1.15;text-wrap:balance;margin:0}
+h2{font-size:clamp(26px,4vw,40px);letter-spacing:-.01em}
+h3{font-size:17px;font-weight:500}
+p{margin:0}
+a{color:var(--link)}
+:focus-visible{outline:3px solid var(--marking);outline-offset:3px;border-radius:4px}
+.wrap{max-width:1180px;margin:0 auto;padding-left:var(--gut-l);padding-right:var(--gut-r)}
+.eyebrow{font:500 12px/1.4 var(--f-mono);letter-spacing:.12em;text-transform:uppercase;color:var(--muted)}
+.dash{height:4px;background:repeating-linear-gradient(90deg,var(--marking) 0 34px,transparent 34px 58px);border:0;margin:0}
+section{padding-block:clamp(56px,8vw,96px)}
+.sec-head{display:grid;gap:12px;margin-bottom:36px;max-width:720px}
+.sec-head p{color:var(--muted);font-size:17px}
+
+/* header */
+header{position:sticky;top:env(safe-area-inset-top,0px);z-index:50;background:var(--asphalt);color:var(--on-asphalt)}
+.hbar{display:flex;align-items:center;gap:20px;min-height:64px;padding-block:8px}
+.brand{display:flex;align-items:center;gap:10px;color:inherit;text-decoration:none;flex-shrink:0}
+.brand img{width:40px;height:40px;border-radius:50%;display:block}
+.brand b{font:700 15px/1.1 var(--f-display);letter-spacing:.02em}
+.brand small{display:block;font:500 10px/1.2 var(--f-mono);letter-spacing:.1em;color:var(--on-asphalt-muted);text-transform:uppercase}
+nav{display:flex;gap:4px;margin-left:auto;overflow-x:auto;scrollbar-width:none}
+nav::-webkit-scrollbar{display:none}
+nav a{color:var(--on-asphalt-muted);text-decoration:none;font-size:14px;font-weight:500;padding:8px 10px;border-radius:6px;white-space:nowrap}
+nav a:hover{color:var(--on-asphalt);background:var(--asphalt-2)}
+.langs{display:flex;border:1px solid #3a4045;border-radius:8px;overflow:hidden;flex-shrink:0}
+.langs button{all:unset;cursor:pointer;font:500 12px/1 var(--f-mono);letter-spacing:.06em;padding:9px 10px;color:var(--on-asphalt-muted)}
+.langs button[aria-pressed="true"]{background:var(--marking);color:var(--on-marking)}
+.langs button:focus-visible{outline:2px solid var(--marking);outline-offset:-2px}
+@media (max-width:900px){
+  .hbar{flex-wrap:wrap;gap:8px 12px}
+  .langs{margin-left:auto}
+  nav{order:3;width:100%;margin:0 0 0 -10px}
+}
+
+/* hero */
+.hero{position:relative;background:var(--asphalt);color:var(--on-asphalt);padding:0;overflow:hidden}
+.hero-img{position:absolute;inset:0;background:url(img/road_finished.jpg) center 60%/cover}
+.hero-img::after{content:"";position:absolute;inset:0;background:linear-gradient(90deg,rgba(14,16,18,.92) 0%,rgba(14,16,18,.72) 48%,rgba(14,16,18,.25) 100%)}
+.hero .wrap{position:relative;padding-block:clamp(72px,12vw,150px) clamp(56px,8vw,96px);display:grid;gap:24px}
+.hero .eyebrow{color:var(--marking)}
+.hero h1{font-size:clamp(32px,6vw,64px);max-width:15ch;letter-spacing:-.015em}
+.hero p.lead{font-size:clamp(17px,1.8vw,20px);max-width:56ch;color:#d9ddd8}
+.ctas{display:flex;flex-wrap:wrap;gap:12px;margin-top:8px}
+.btn{display:inline-flex;align-items:center;gap:8px;font:600 15px/1 var(--f-body);padding:15px 22px;border-radius:8px;text-decoration:none;border:2px solid transparent;cursor:pointer}
+.btn.primary{background:var(--marking);color:var(--on-marking)}
+.btn.primary:hover{filter:brightness(1.08)}
+.btn.ghost{border-color:#5a6167;color:var(--on-asphalt)}
+.btn.ghost:hover{border-color:var(--on-asphalt)}
+.lic-chip{display:inline-flex;gap:10px;align-items:center;font:500 13px/1.3 var(--f-mono);color:var(--on-asphalt-muted);margin-top:12px}
+.lic-chip b{color:var(--on-asphalt);font-weight:500}
+
+/* stats */
+.stats{background:var(--asphalt);color:var(--on-asphalt);padding-block:0}
+.stats-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:#33383d;border-left:1px solid #33383d;border-right:1px solid #33383d}
+.stat{background:var(--asphalt);padding:28px 22px 30px;display:grid;gap:6px;align-content:start}
+.stat .n{font:700 clamp(36px,5vw,54px)/1 var(--f-display);color:var(--marking)}
+.stat .l{color:var(--on-asphalt-muted);font-size:14px;line-height:1.35}
+@media (max-width:700px){.stats-grid{grid-template-columns:repeat(2,1fr)}}
+
+/* about */
+.about-grid{display:grid;grid-template-columns:1.1fr .9fr;gap:clamp(28px,5vw,64px);align-items:start}
+.about-text{display:grid;gap:18px;font-size:17px;min-width:0}
+.about-text p{max-width:62ch}
+.regions{display:flex;flex-wrap:wrap;gap:8px;margin-top:6px}
+.regions span{font-size:14px;font-weight:500;padding:7px 12px;border:1px solid var(--line);border-radius:999px;background:var(--surface)}
+.about-photo{position:relative;border-radius:10px;overflow:hidden;aspect-ratio:4/3;max-width:100%}
+.about-photo img{width:100%;height:100%;object-fit:cover;display:block}
+.about-photo figcaption{position:absolute;left:0;right:0;bottom:0;padding:28px 16px 12px;color:#fff;font-size:13px;background:linear-gradient(transparent,rgba(0,0,0,.7))}
+@media (max-width:860px){.about-grid{grid-template-columns:1fr}}
+
+/* services */
+.services{background:var(--surface);border-block:1px solid var(--line)}
+.svc-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+.svc{display:grid;grid-template-rows:auto 1fr;border:1px solid var(--line);border-radius:10px;overflow:hidden;background:var(--bg)}
+.svc img{width:100%;aspect-ratio:3/2;object-fit:cover;display:block}
+.svc div{padding:18px 18px 20px;display:grid;gap:8px;align-content:start}
+.svc .k{font:500 11px/1 var(--f-mono);letter-spacing:.1em;color:var(--muted);text-transform:uppercase}
+.svc p{color:var(--muted);font-size:15px}
+@media (max-width:900px){.svc-grid{grid-template-columns:repeat(2,1fr)}}
+@media (max-width:560px){.svc-grid{grid-template-columns:1fr}}
+
+/* projects */
+.filters{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:20px}
+.chip{all:unset;cursor:pointer;font-size:14px;font-weight:500;padding:8px 14px;border-radius:999px;border:1px solid var(--line);background:var(--surface);color:var(--fg)}
+.chip[aria-pressed="true"]{background:var(--fg);color:var(--bg);border-color:var(--fg)}
+.chip:focus-visible{outline:3px solid var(--marking);outline-offset:2px}
+.ledger{border-top:2px solid var(--fg)}
+.row{display:grid;grid-template-columns:110px 1fr;gap:20px;padding:18px 0;border-bottom:1px solid var(--line);align-items:baseline}
+.row .yr{font:500 14px/1.4 var(--f-mono);color:var(--muted);font-variant-numeric:tabular-nums}
+.row .nm{min-width:0}
+.row .nm h3{font-family:var(--f-body);font-weight:600;font-size:17px;line-height:1.4}
+.row .nm small{display:block;color:var(--muted);font-size:14px;margin-top:2px}
+.row .sum{font:500 16px/1.4 var(--f-mono);text-align:right;font-variant-numeric:tabular-nums}
+.row .sum em{display:block;font-style:normal;font-size:12px;color:var(--muted);letter-spacing:.04em}
+@media (max-width:700px){
+  .row{grid-template-columns:1fr;gap:4px}
+}
+.note{color:var(--muted);font-size:14px;margin-top:16px}
+
+/* gallery */
+.gallery{background:var(--asphalt);color:var(--on-asphalt)}
+.gallery .sec-head p,.gallery .eyebrow{color:var(--on-asphalt-muted)}
+.gallery .chip{background:transparent;border-color:#454b51;color:var(--on-asphalt)}
+.gallery .chip[aria-pressed="true"]{background:var(--marking);color:var(--on-marking);border-color:var(--marking)}
+.g-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:10px}
+.g-item{all:unset;cursor:zoom-in;position:relative;border-radius:8px;overflow:hidden;aspect-ratio:4/3;background:var(--asphalt-2);display:block}
+.g-item img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .4s}
+.g-item:hover img{transform:scale(1.04)}
+.g-item span{position:absolute;left:0;right:0;bottom:0;padding:26px 12px 10px;font-size:13px;line-height:1.35;color:#fff;background:linear-gradient(transparent,rgba(0,0,0,.78))}
+.g-item:focus-visible{outline:3px solid var(--marking);outline-offset:2px}
+@media (max-width:480px){.g-grid{grid-template-columns:repeat(2,1fr)}.g-item span{font-size:12px;padding:20px 8px 8px}}
+
+/* advantages */
+.adv-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:0;border-top:1px solid var(--line)}
+.adv{padding:26px 24px 28px 0;border-bottom:1px solid var(--line);display:grid;gap:8px;align-content:start}
+.adv:not(:nth-child(3n+1)){padding-left:24px;border-left:1px solid var(--line)}
+.adv svg{width:28px;height:28px;stroke:var(--fg);fill:none;stroke-width:1.8}
+.adv svg .acc{stroke:var(--marking)}
+.adv p{color:var(--muted);font-size:15px}
+@media (max-width:860px){.adv-grid{grid-template-columns:1fr 1fr}.adv:not(:nth-child(3n+1)){padding-left:0;border-left:0}.adv:nth-child(2n){padding-left:24px;border-left:1px solid var(--line)}}
+@media (max-width:520px){.adv-grid{grid-template-columns:1fr}.adv:nth-child(2n){padding-left:0;border-left:0}}
+
+/* awards + licence */
+.docs{background:var(--surface);border-block:1px solid var(--line)}
+.aw-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:20px}
+.aw{all:unset;cursor:zoom-in;display:grid;gap:10px;align-content:start}
+.aw .ph{aspect-ratio:3/4;border-radius:6px;overflow:hidden;border:1px solid var(--line);background:var(--bg)}
+.aw img{width:100%;height:100%;object-fit:cover;display:block}
+.aw p{font-size:14px;line-height:1.4}
+.aw p em{display:block;font-style:normal;font:500 12px/1.4 var(--f-mono);color:var(--muted);margin-top:2px}
+.aw:focus-visible{outline:3px solid var(--marking);outline-offset:4px;border-radius:6px}
+@media (max-width:860px){.aw-grid{grid-template-columns:repeat(2,1fr)}}
+.lic{display:grid;grid-template-columns:1fr 1fr;gap:clamp(28px,5vw,56px);margin-top:clamp(56px,8vw,88px);padding-top:clamp(40px,6vw,64px);border-top:1px solid var(--line)}
+.lic-card{background:var(--asphalt);color:var(--on-asphalt);border-radius:10px;padding:28px;display:grid;gap:18px;align-content:start;min-width:0}
+.lic-card .num{font:700 clamp(28px,4vw,40px)/1 var(--f-display);color:var(--marking)}
+.lic-card dl{display:grid;grid-template-columns:auto 1fr;gap:10px 20px;margin:0;font-size:15px}
+.lic-card dt{color:var(--on-asphalt-muted);font-size:13px;padding-top:2px}
+.lic-card dd{margin:0}
+.lic-pages{display:grid;grid-template-columns:repeat(4,1fr);gap:10px}
+.lic-pages .aw .ph{aspect-ratio:990/1400}
+@media (max-width:860px){.lic{grid-template-columns:1fr}}
+@media (max-width:440px){.lic-card dl{grid-template-columns:1fr;gap:2px}.lic-card dd{margin-bottom:10px}}
+
+/* contacts */
+.contact{background:var(--asphalt);color:var(--on-asphalt)}
+.c-grid{display:grid;grid-template-columns:1fr 1fr;gap:clamp(28px,5vw,64px);align-items:start}
+.contact h2{color:var(--on-asphalt)}
+.contact .sec-head p{color:var(--on-asphalt-muted)}
+.c-list{display:grid;gap:0;border-top:1px solid #353a3f}
+.c-row{display:grid;grid-template-columns:120px 1fr auto;gap:14px;padding:16px 0;border-bottom:1px solid #353a3f;align-items:center}
+.c-row dt{font:500 12px/1.3 var(--f-mono);letter-spacing:.08em;text-transform:uppercase;color:var(--on-asphalt-muted)}
+.c-row dd{margin:0;font-size:17px;min-width:0;overflow-wrap:anywhere}
+.c-row dd a{color:var(--on-asphalt);text-decoration:none}
+.c-row dd a:hover{text-decoration:underline}
+.copy{all:unset;cursor:pointer;font:500 12px/1 var(--f-mono);padding:8px 10px;border:1px solid #454b51;border-radius:6px;color:var(--on-asphalt-muted);white-space:nowrap}
+.copy:hover{color:var(--on-asphalt);border-color:var(--on-asphalt-muted)}
+.copy:focus-visible{outline:2px solid var(--marking);outline-offset:2px}
+.c-side{display:grid;gap:16px}
+.c-card{background:var(--asphalt-2);border-radius:10px;padding:24px;display:grid;gap:12px}
+.c-card p{color:var(--on-asphalt-muted)}
+@media (max-width:860px){.c-grid{grid-template-columns:1fr}}
+@media (max-width:480px){.c-row{grid-template-columns:1fr auto;gap:4px 12px}.c-row dt{grid-column:1/-1}}
+footer{background:var(--asphalt);color:var(--on-asphalt-muted);font-size:13px;border-top:1px solid #2c3135}
+footer .wrap{display:flex;flex-wrap:wrap;gap:8px 24px;justify-content:space-between;padding-block:22px}
+
+/* lightbox */
+.lb{position:fixed;inset:0;z-index:100;background:rgba(8,9,10,.94);display:grid;grid-template-rows:1fr auto;padding:max(16px,env(safe-area-inset-top,0px)) var(--gut-r) max(16px,env(safe-area-inset-bottom,0px)) var(--gut-l)}
+.lb img{max-width:100%;max-height:100%;margin:auto;object-fit:contain;align-self:center;justify-self:center;min-height:0}
+.lb-cap{color:#e6e8e4;text-align:center;padding:12px 56px 0;font-size:15px}
+.lb button{all:unset;cursor:pointer;position:absolute;color:#fff;font:400 28px/1 var(--f-body);width:48px;height:48px;display:grid;place-items:center;border-radius:50%;background:rgba(255,255,255,.08)}
+.lb button:hover{background:rgba(255,255,255,.18)}
+.lb button:focus-visible{outline:2px solid var(--marking)}
+.lb .x{top:max(16px,env(safe-area-inset-top,0px));right:var(--gut-r)}
+.lb .pv{left:var(--gut-l);top:50%;transform:translateY(-50%)}
+.lb .nx{right:var(--gut-r);top:50%;transform:translateY(-50%)}
+</style>
+</head>
+<body>
+
+
+<header>
+  <div class="wrap hbar">
+    <a class="brand" href="#top" aria-label="Kalau Plus">
+      <img src="img/logo.jpg" alt="">
+      <span><b>KALAU PLUS</b><small data-t="brandSub">ТОО · Актобе</small></span>
+    </a>
+    <nav aria-label="Разделы">
+      <a href="#about" data-t="navAbout">О компании</a>
+      <a href="#services" data-t="navServices">Услуги</a>
+      <a href="#projects" data-t="navProjects">Проекты</a>
+      <a href="#photos" data-t="navPhotos">Фото</a>
+      <a href="#docs" data-t="navDocs">Документы</a>
+      <a href="#contacts" data-t="navContacts">Контакты</a>
+    </nav>
+    <div class="langs" role="group" aria-label="Язык / Тіл / Language">
+      <button type="button" id="lang-kz" data-lang="kz" aria-pressed="false">ҚАЗ</button>
+      <button type="button" id="lang-ru" data-lang="ru" aria-pressed="true">РУС</button>
+      <button type="button" id="lang-en" data-lang="en" aria-pressed="false">ENG</button>
+    </div>
+  </div>
+</header>
+
+<main id="top">
+  <section class="hero">
+    <div class="hero-img" role="img" aria-label=""></div>
+    <div class="wrap">
+      <p class="eyebrow" data-t="heroEyebrow">Строительно-дорожная компания · Актобе · с 2018 года</p>
+      <h1 data-t="heroTitle">Строим, ремонтируем и содержим дороги</h1>
+      <p class="lead" data-t="heroLead">Дорожные работы, благоустройство, уличное освещение и инженерные сети в Актюбинской области. Своя техника, свой персонал, государственная лицензия II категории.</p>
+      <div class="ctas">
+        <a class="btn primary" href="#contacts" data-t="ctaContact">Обсудить объект</a>
+        <a class="btn ghost" href="#projects" data-t="ctaProjects">Наши проекты</a>
+      </div>
+      <p class="lic-chip"><span data-t="licShort">Лицензия</span> <b>ГСЛ №03831</b> · <span data-t="licCat">II категория</span></p>
+    </div>
+  </section>
+
+  <section class="stats" aria-label="Цифры">
+    <div class="wrap"><div class="stats-grid">
+      <div class="stat"><span class="n">8</span><span class="l" data-t="st1">лет работы (2018–2026)</span></div>
+      <div class="stat"><span class="n">30+</span><span class="l" data-t="st2">исполненных государственных и коммерческих договоров</span></div>
+      <div class="stat"><span class="n">6</span><span class="l" data-t="st3">направлений деятельности</span></div>
+      <div class="stat"><span class="n">3</span><span class="l" data-t="st4">области Казахстана</span></div>
+    </div></div>
+    <hr class="dash">
+  </section>
+
+  <section id="about">
+    <div class="wrap about-grid">
+      <div class="about-text">
+        <p class="eyebrow" data-t="navAbout">О компании</p>
+        <h2 data-t="aboutTitle">Дорожные и городские работы под ключ</h2>
+        <p data-t="about1">ТОО «Kalau Plus» работает с 2018 года. Мы выполняем государственные и коммерческие заказы: от ямочного ремонта и зимней уборки улиц до реконструкции автодорог, благоустройства парков и прокладки инженерных сетей.</p>
+        <p data-t="about2">Работы выполнены в Актюбинской, Костанайской и Кызылординской областях. Материально-техническая база включает дорожно-строительную технику, грузовой транспорт и оборудование для содержания дорог летом и зимой.</p>
+        <div class="regions">
+          <span data-t="rg1">Актюбинская область</span>
+          <span data-t="rg2">Костанайская область</span>
+          <span data-t="rg3">Кызылординская область</span>
+        </div>
+      </div>
+      <figure class="about-photo" style="margin:0">
+        <img src="img/dumptrucks.jpg" alt="" loading="lazy">
+        <figcaption data-t="aboutCap">Собственный парк самосвалов на укладке асфальта</figcaption>
+      </figure>
+    </div>
+  </section>
+
+  <section id="services" class="services">
+    <div class="wrap">
+      <div class="sec-head">
+        <p class="eyebrow" data-t="navServices">Услуги</p>
+        <h2 data-t="svcTitle">Шесть направлений работы</h2>
+        <p data-t="svcLead">Ведём объект целиком: подготовка основания, строительство, сети, благоустройство и дальнейшее содержание.</p>
+      </div>
+      <div class="svc-grid" id="svc"></div>
+    </div>
+  </section>
+
+  <section id="projects">
+    <div class="wrap">
+      <div class="sec-head">
+        <p class="eyebrow" data-t="navProjects">Проекты</p>
+        <h2 data-t="prjTitle">Выполненные договоры</h2>
+        <p data-t="prjLead">Избранные государственные и коммерческие контракты с 2020 по 2026 год.</p>
+      </div>
+      <div class="filters" id="prj-filters"></div>
+      <div class="ledger" id="ledger"></div>
+    </div>
+  </section>
+
+  <section id="photos" class="gallery">
+    <div class="wrap">
+      <div class="sec-head">
+        <p class="eyebrow" data-t="navPhotos">Фото</p>
+        <h2 data-t="galTitle">С наших объектов</h2>
+        <p data-t="galLead">Фотографии сделаны нашими бригадами на площадках. Нажмите на снимок, чтобы открыть крупно.</p>
+      </div>
+      <div class="filters" id="gal-filters"></div>
+      <div class="g-grid" id="gal"></div>
+    </div>
+  </section>
+
+  <section id="why">
+    <div class="wrap">
+      <div class="sec-head">
+        <p class="eyebrow" data-t="whyEyebrow">Почему мы</p>
+        <h2 data-t="whyTitle">Преимущества работы с нами</h2>
+      </div>
+      <div class="adv-grid" id="adv"></div>
+    </div>
+  </section>
+
+  <section id="docs" class="docs">
+    <div class="wrap">
+      <div class="sec-head">
+        <p class="eyebrow" data-t="navDocs">Документы</p>
+        <h2 data-t="awTitle">Благодарственные письма и сертификаты</h2>
+        <p data-t="awLead">Отзывы акиматов, маслихата и жителей сёл, где мы работали и которым помогали.</p>
+      </div>
+      <div class="aw-grid" id="awards"></div>
+
+      <div class="lic">
+        <div class="lic-card">
+          <p class="eyebrow" style="color:var(--on-asphalt-muted)" data-t="licTitle">Государственная лицензия</p>
+          <p class="num">ГСЛ №03831</p>
+          <p data-t="licText" style="color:var(--on-asphalt-muted)">Лицензия подтверждает право на выполнение строительно-монтажных работ, включая строительство и капитальный ремонт автомобильных дорог, инженерных сетей и объектов гражданского строительства.</p>
+          <dl>
+            <dt data-t="licD1">Дата выдачи</dt><dd>16.10.2017</dd>
+            <dt data-t="licD2">Вид деятельности</dt><dd data-t="licV2">Строительно-монтажные работы</dd>
+            <dt data-t="licD3">Категория</dt><dd data-t="licCat">II категория</dd>
+            <dt data-t="licD4">Лицензиар</dt><dd data-t="licV4">Управление государственного архитектурно-строительного контроля г. Астаны</dd>
+            <dt data-t="licD5">Место выдачи</dt><dd data-t="licV5">г. Астана</dd>
+          </dl>
+        </div>
+        <div style="display:grid;gap:14px;align-content:start;min-width:0">
+          <p class="eyebrow" data-t="licPages">Страницы лицензии и приложения</p>
+          <div class="lic-pages" id="licpages"></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="contacts" class="contact">
+    <div class="wrap c-grid">
+      <div>
+        <div class="sec-head">
+          <p class="eyebrow" style="color:var(--marking)" data-t="navContacts">Контакты</p>
+          <h2 data-t="cTitle">Расскажите о вашем объекте</h2>
+          <p data-t="cLead">Позвоните или напишите на почту. Выедем на место, оценим объём и подготовим коммерческое предложение.</p>
+        </div>
+        <dl class="c-list">
+          <div class="c-row"><dt data-t="cPhone">Телефон</dt><dd><a href="tel:+77028110504">8 (702) 811-05-04</a></dd><button type="button" class="copy" data-copy="+7 702 811 05 04" data-t="copy">Копировать</button></div>
+          <div class="c-row"><dt data-t="cPhone">Телефон</dt><dd><a href="tel:+77770890040">8 (777) 089-00-40</a></dd><button type="button" class="copy" data-copy="+7 777 089 00 40" data-t="copy">Копировать</button></div>
+          <div class="c-row"><dt>E-mail</dt><dd><a href="mailto:tookalauplus@mail.ru">tookalauplus@mail.ru</a></dd><button type="button" class="copy" data-copy="tookalauplus@mail.ru" data-t="copy">Копировать</button></div>
+          <div class="c-row"><dt data-t="cAddr">Адрес</dt><dd data-t="addr">Республика Казахстан, 030700, г. Актобе, ул. Маресьева, 105, оф. 301</dd><button type="button" class="copy" data-copyt="addr" data-t="copy">Копировать</button></div>
+        </dl>
+      </div>
+      <div class="c-side">
+        <div class="c-card">
+          <p class="eyebrow" style="color:var(--on-asphalt-muted)" data-t="cDir">Директор</p>
+          <p style="color:var(--on-asphalt);font-size:18px;font-weight:600" data-t="dirName">Айбосынов Канат Болатбекович</p>
+        </div>
+        <div class="c-card">
+          <p class="eyebrow" style="color:var(--on-asphalt-muted)" data-t="cReq">Реквизиты</p>
+          <p style="color:var(--on-asphalt)"><span data-t="cBin">БИН</span> <span style="font-family:var(--f-mono)">100240003140</span></p>
+          <p style="color:var(--on-asphalt)"><span data-t="licShort">Лицензия</span> <span style="font-family:var(--f-mono)">ГСЛ №03831</span></p>
+        </div>
+        <a class="btn primary" style="justify-self:start" href="https://2gis.kz/aktobe/search/%D0%9C%D0%B0%D1%80%D0%B5%D1%81%D1%8C%D0%B5%D0%B2%D0%B0%20105" target="_blank" rel="noopener" data-t="cMap">Открыть на карте 2ГИС</a>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <span>© 2018–2026 <span data-t="ftName">ТОО «Kalau Plus»</span></span>
+    <span data-t="ftLine">Актобе · дороги, благоустройство, инженерные сети</span>
+  </div>
+</footer>
+
+<div class="lb" id="lb" hidden role="dialog" aria-modal="true" aria-label="Фото">
+  <img id="lb-img" alt="">
+  <p class="lb-cap" id="lb-cap"></p>
+  <button type="button" class="x" id="lb-x" aria-label="Закрыть">×</button>
+  <button type="button" class="pv" id="lb-pv" aria-label="Назад">‹</button>
+  <button type="button" class="nx" id="lb-nx" aria-label="Вперёд">›</button>
+</div>
+
+<script>
+const T = {
+  brandSub:{ru:"ТОО · Актобе",kz:"ЖШС · Ақтөбе",en:"LLP · Aktobe"},
+  navAbout:{ru:"О компании",kz:"Компания туралы",en:"About"},
+  navServices:{ru:"Услуги",kz:"Қызметтер",en:"Services"},
+  navProjects:{ru:"Проекты",kz:"Жобалар",en:"Projects"},
+  navPhotos:{ru:"Фото",kz:"Фото",en:"Photos"},
+  navDocs:{ru:"Документы",kz:"Құжаттар",en:"Documents"},
+  navContacts:{ru:"Контакты",kz:"Байланыс",en:"Contacts"},
+  heroEyebrow:{ru:"Строительно-дорожная компания · Актобе · с 2018 года",kz:"Құрылыс-жол компаниясы · Ақтөбе · 2018 жылдан бері",en:"Road construction company · Aktobe · since 2018"},
+  heroTitle:{ru:"Строим, ремонтируем и содержим дороги",kz:"Жолдарды саламыз, жөндейміз және күтіп ұстаймыз",en:"We build, repair and maintain roads"},
+  heroLead:{ru:"Дорожные работы, благоустройство, уличное освещение и инженерные сети в Актюбинской области. Своя техника, свой персонал, государственная лицензия II категории.",
+            kz:"Ақтөбе облысындағы жол жұмыстары, абаттандыру, көше жарығы және инженерлік желілер. Өз техникамыз, өз мамандарымыз, II санатты мемлекеттік лицензия.",
+            en:"Road works, landscaping, street lighting and utility networks in Aktobe region. Our own machinery and crews, and a category II state licence."},
+  ctaContact:{ru:"Обсудить объект",kz:"Нысанды талқылау",en:"Discuss a project"},
+  ctaProjects:{ru:"Наши проекты",kz:"Біздің жобалар",en:"Our projects"},
+  licShort:{ru:"Лицензия",kz:"Лицензия",en:"Licence"},
+  licCat:{ru:"II категория",kz:"II санат",en:"Category II"},
+  st1:{ru:"лет работы (2018–2026)",kz:"жыл жұмыс (2018–2026)",en:"years in business (2018–2026)"},
+  st2:{ru:"исполненных государственных и коммерческих договоров",kz:"орындалған мемлекеттік және коммерциялық шарт",en:"public and commercial contracts completed"},
+  st3:{ru:"направлений деятельности",kz:"қызмет бағыты",en:"lines of work"},
+  st4:{ru:"области Казахстана",kz:"Қазақстан облысы",en:"regions of Kazakhstan"},
+  aboutTitle:{ru:"Дорожные и городские работы под ключ",kz:"Жол және қалалық жұмыстар толық көлемде",en:"Road and municipal works, start to finish"},
+  about1:{ru:"ТОО «Kalau Plus» работает с 2018 года. Мы выполняем государственные и коммерческие заказы: от ямочного ремонта и зимней уборки улиц до реконструкции автодорог, благоустройства парков и прокладки инженерных сетей.",
+          kz:"«Kalau Plus» ЖШС 2018 жылдан бері жұмыс істейді. Біз мемлекеттік және коммерциялық тапсырыстарды орындаймыз: шұңқырлы жөндеу мен көшелерді қыста тазалаудан бастап автожолдарды қайта жаңартуға, саябақтарды абаттандыруға және инженерлік желілерді тартуға дейін.",
+          en:"Kalau Plus LLP has been operating since 2018. We carry out public and commercial contracts, from pothole repair and winter street clearing to road reconstruction, park landscaping and utility installation."},
+  about2:{ru:"Работы выполнены в Актюбинской, Костанайской и Кызылординской областях. Материально-техническая база включает дорожно-строительную технику, грузовой транспорт и оборудование для содержания дорог летом и зимой.",
+          kz:"Жұмыстар Ақтөбе, Қостанай және Қызылорда облыстарында орындалды. Материалдық-техникалық базамызда жол-құрылыс техникасы, жүк көлігі және жолдарды жазда да, қыста да күтіп ұстауға арналған жабдықтар бар.",
+          en:"We have worked in the Aktobe, Kostanay and Kyzylorda regions. Our fleet includes road-building machinery, haul trucks and equipment for summer and winter road maintenance."},
+  rg1:{ru:"Актюбинская область",kz:"Ақтөбе облысы",en:"Aktobe region"},
+  rg2:{ru:"Костанайская область",kz:"Қостанай облысы",en:"Kostanay region"},
+  rg3:{ru:"Кызылординская область",kz:"Қызылорда облысы",en:"Kyzylorda region"},
+  aboutCap:{ru:"Собственный парк самосвалов на укладке асфальта",kz:"Асфальт төсеудегі өз өзітүсіргіштеріміз",en:"Our own dump trucks on an asphalt job"},
+  svcTitle:{ru:"Шесть направлений работы",kz:"Жұмыстың алты бағыты",en:"Six lines of work"},
+  svcLead:{ru:"Ведём объект целиком: подготовка основания, строительство, сети, благоустройство и дальнейшее содержание.",kz:"Нысанды толық жүргіземіз: негізді дайындау, құрылыс, желілер, абаттандыру және кейінгі күтім.",en:"We take a site from start to finish: groundwork, construction, utilities, landscaping and ongoing upkeep."},
+  prjTitle:{ru:"Выполненные договоры",kz:"Орындалған шарттар",en:"Completed contracts"},
+  prjLead:{ru:"Избранные государственные и коммерческие контракты с 2020 по 2026 год.",kz:"2020–2026 жылдардағы таңдаулы мемлекеттік және коммерциялық келісімшарттар.",en:"Selected public and commercial contracts, 2020 to 2026."},
+  galTitle:{ru:"С наших объектов",kz:"Біздің нысандардан",en:"From our sites"},
+  galLead:{ru:"Фотографии сделаны нашими бригадами на площадках. Нажмите на снимок, чтобы открыть крупно.",kz:"Суреттерді біздің бригадалар нысандарда түсірген. Үлкейту үшін суретті басыңыз.",en:"Photos taken by our crews on site. Tap a photo to enlarge it."},
+  whyEyebrow:{ru:"Почему мы",kz:"Неліктен біз",en:"Why us"},
+  whyTitle:{ru:"Преимущества работы с нами",kz:"Бізбен жұмыс істеудің артықшылықтары",en:"Why clients work with us"},
+  awTitle:{ru:"Благодарственные письма и сертификаты",kz:"Алғыс хаттар мен сертификаттар",en:"Letters of thanks and certificates"},
+  awLead:{ru:"Отзывы акиматов, маслихата и жителей сёл, где мы работали и которым помогали.",kz:"Біз жұмыс істеген және көмектескен әкімдіктер, мәслихат пен ауыл тұрғындарының алғысы.",en:"Recognition from akimats, the regional maslikhat and the villages we have worked in and supported."},
+  licTitle:{ru:"Государственная лицензия",kz:"Мемлекеттік лицензия",en:"State licence"},
+  licText:{ru:"Лицензия подтверждает право на выполнение строительно-монтажных работ, включая строительство и капитальный ремонт автомобильных дорог, инженерных сетей и объектов гражданского строительства.",
+           kz:"Лицензия құрылыс-монтаж жұмыстарын, оның ішінде автожолдарды, инженерлік желілерді және азаматтық құрылыс нысандарын салу мен күрделі жөндеуді орындау құқығын растайды.",
+           en:"The licence confirms our right to carry out construction and installation works, including the construction and major repair of roads, utility networks and civil buildings."},
+  licD1:{ru:"Дата выдачи",kz:"Берілген күні",en:"Issued"},
+  licD2:{ru:"Вид деятельности",kz:"Қызмет түрі",en:"Activity"},
+  licV2:{ru:"Строительно-монтажные работы",kz:"Құрылыс-монтаж жұмыстары",en:"Construction and installation works"},
+  licD3:{ru:"Категория",kz:"Санаты",en:"Category"},
+  licD4:{ru:"Лицензиар",kz:"Лицензиар",en:"Licensor"},
+  licV4:{ru:"Управление государственного архитектурно-строительного контроля г. Астаны",kz:"Астана қаласының Мемлекеттік сәулет-құрылыс бақылауы басқармасы",en:"Department of State Architectural and Construction Control, Astana"},
+  licD5:{ru:"Место выдачи",kz:"Берілген жері",en:"Place of issue"},
+  licV5:{ru:"г. Астана",kz:"Астана қ.",en:"Astana"},
+  licPages:{ru:"Страницы лицензии и приложения",kz:"Лицензия мен қосымша беттері",en:"Licence and annex pages"},
+  cTitle:{ru:"Расскажите о вашем объекте",kz:"Нысаныңыз туралы айтыңыз",en:"Tell us about your project"},
+  cLead:{ru:"Позвоните или напишите на почту. Выедем на место, оценим объём и подготовим коммерческое предложение.",kz:"Қоңырау шалыңыз немесе поштаға жазыңыз. Орнына барып, көлемін бағалап, коммерциялық ұсыныс дайындаймыз.",en:"Call or email us. We will visit the site, assess the scope and prepare a commercial proposal."},
+  cPhone:{ru:"Телефон",kz:"Телефон",en:"Phone"},
+  cAddr:{ru:"Адрес",kz:"Мекенжай",en:"Address"},
+  addr:{ru:"Республика Казахстан, 030700, г. Актобе, ул. Маресьева, 105, оф. 301",kz:"Қазақстан Республикасы, 030700, Ақтөбе қ., Маресьев к-сі, 105, 301-кеңсе",en:"105 Maresyev St., office 301, Aktobe 030700, Kazakhstan"},
+  copy:{ru:"Копировать",kz:"Көшіру",en:"Copy"},
+  copied:{ru:"Скопировано",kz:"Көшірілді",en:"Copied"},
+  cDir:{ru:"Директор",kz:"Директор",en:"Director"},
+  dirName:{ru:"Айбосынов Канат Болатбекович",kz:"Айбосынов Қанат Болатбекұлы",en:"Kanat Aibossynov"},
+  cReq:{ru:"Реквизиты",kz:"Деректемелер",en:"Company details"},
+  cBin:{ru:"БИН",kz:"БСН",en:"BIN"},
+  cMap:{ru:"Открыть на карте 2ГИС",kz:"2ГИС картасында ашу",en:"Open in 2GIS maps"},
+  ftName:{ru:"ТОО «Kalau Plus»",kz:"«Kalau Plus» ЖШС",en:"Kalau Plus LLP"},
+  ftLine:{ru:"Актобе · дороги, благоустройство, инженерные сети",kz:"Ақтөбе · жолдар, абаттандыру, инженерлік желілер",en:"Aktobe · roads, landscaping, utility networks"},
+  all:{ru:"Все",kz:"Барлығы",en:"All"},
+  fRoads:{ru:"Дороги",kz:"Жолдар",en:"Roads"},
+  fUrban:{ru:"Благоустройство и сети",kz:"Абаттандыру және желілер",en:"Landscaping & utilities"},
+  gRoads:{ru:"Дорожные работы",kz:"Жол жұмыстары",en:"Road works"},
+  gNet:{ru:"Инженерные сети",kz:"Инженерлік желілер",en:"Utilities"},
+  gPark:{ru:"Благоустройство",kz:"Абаттандыру",en:"Landscaping"},
+  gWinter:{ru:"Зимнее содержание",kz:"Қысқы күтім",en:"Winter upkeep"},
+  close:{ru:"Закрыть",kz:"Жабу",en:"Close"}
+};
+
+const SVC = [
+  {img:"paver_workers",t:{ru:"Дорожное строительство",kz:"Жол құрылысы",en:"Road construction"},d:{ru:"Ямочный, средний и текущий ремонт, реконструкция автодорог",kz:"Шұңқырлы, орташа және ағымдағы жөндеу, автожолдарды қайта жаңарту",en:"Pothole, medium and routine repair; road reconstruction"}},
+  {img:"grader_dirt",t:{ru:"Содержание дорог",kz:"Жолдарды күтіп ұстау",en:"Road maintenance"},d:{ru:"Круглогодичное содержание и уборка улиц в зимний период",kz:"Жыл бойы күтіп ұстау және қыста көшелерді тазалау",en:"Year-round upkeep and winter street clearing"}},
+  {img:"swing_park",t:{ru:"Благоустройство",kz:"Абаттандыру",en:"Landscaping"},d:{ru:"Скверы, парки, дворовые территории, аллеи",kz:"Скверлер, саябақтар, аула аумақтары, аллеялар",en:"Squares, parks, courtyards and alleys"}},
+  {img:"streetlights",t:{ru:"Электроснабжение",kz:"Электрмен жабдықтау",en:"Power supply"},d:{ru:"Уличное освещение, обслуживание электросетей и ЛЭП",kz:"Көше жарығы, электр желілері мен ЭБЖ-ға қызмет көрсету",en:"Street lighting, grid and power line servicing"}},
+  {img:"well_ring",t:{ru:"Водоснабжение",kz:"Сумен жабдықтау",en:"Water supply"},d:{ru:"Модули очистки и разбора питьевой воды, сети водоснабжения и канализации",kz:"Ауыз суды тазарту және тарату модульдері, су құбыры және кәріз желілері",en:"Drinking-water treatment units, water and sewer networks"}},
+  {img:"loader_slabs",t:{ru:"Ремонт зданий",kz:"Ғимараттарды жөндеу",en:"Building repair"},d:{ru:"Текущий и капитальный ремонт административных объектов",kz:"Әкімшілік нысандарды ағымдағы және күрделі жөндеу",en:"Routine and major repair of public buildings"}}
+];
+
+const S = (ru,kz,en)=>({ru,kz,en});
+const PRJ = [
+  {c:"roads",y:"2026",n:S("Реконструкция и содержание дорог Алга – Карабулак – Амангелди – Кумсай","Алға – Қарабұлақ – Амангелді – Құмсай жолдарын қайта жаңарту және күтіп ұстау","Reconstruction and upkeep of the Alga – Karabulak – Amangeldi – Kumsai roads"),p:S("67,2 км","67,2 км","67.2 km")},
+  {c:"roads",y:"2026",n:S("Уборка улиц в осенне-зимний период","Көшелерді күзгі-қысқы кезеңде тазалау","Autumn and winter street clearing"),p:S("г. Актобе, Юго-Запад, участок №7","Ақтөбе қ., Оңтүстік-Батыс, №7 учаске","Aktobe, South-West, section No. 7")},
+  {c:"roads",y:"2023–2026",n:S("Содержание и обслуживание дорог","Жолдарды күтіп ұстау және қызмет көрсету","Road maintenance and servicing"),p:S("г. Кандыагаш, мкр. «Болашак», «Жанаконыс»","Қандыағаш қ., «Болашақ», «Жаңақоныс» ш/а","Kandyagash, Bolashak and Zhanakonys districts")},
+  {c:"roads",y:"2025",n:S("Строительство автодороги с/к «Саздинское лесничество»","«Саздинское лесничество» с/к автожолын салу","Road construction, Sazdinskoye Lesnichestvo"),p:S("г. Актобе · субподряд","Ақтөбе қ. · қосалқы мердігерлік","Aktobe · subcontract")},
+  {c:"urban",y:"2025",n:S("Текущий ремонт здания акимата","Әкімдік ғимаратын ағымдағы жөндеу","Routine repair of the akimat building"),p:S("Алгинский район","Алға ауданы","Alga district")},
+  {c:"urban",y:"2025",n:S("Благоустройство парка им. Жолболдина","Жолболдин атындағы саябақты абаттандыру","Landscaping of Zholboldin Park"),p:S("с. Курык","Құрық а.","Kuryk village")},
+  {c:"urban",y:"2025",n:S("Строительство уличного освещения","Көше жарығын салу","Street lighting construction"),p:S("с. Кызылжар, с. Раим","Қызылжар а., Райым а.","Kyzylzhar and Raim villages")},
+  {c:"roads",y:"2024",n:S("Реконструкция автодороги мкр. «Жастык»","«Жастық» ш/а автожолын қайта жаңарту","Road reconstruction, Zhastyk district"),p:S("г. Кандыагаш","Қандыағаш қ.","Kandyagash")},
+  {c:"urban",y:"2023",n:S("Техническое обслуживание электролиний","Электр желілеріне техникалық қызмет көрсету","Power line maintenance"),p:S("г. Алга","Алға қ.","Alga")},
+  {c:"urban",y:"2022",n:S("Установка блочных модулей очистки питьевой воды","Ауыз суды тазартудың блокты модульдерін орнату","Modular drinking-water treatment units"),p:S("с. Темир, с. Енбек","Темір а., Еңбек а.","Temir and Enbek villages")},
+  {c:"roads",y:"2020",n:S("Средний ремонт автодорог","Автожолдарды орташа жөндеу","Medium repair of roads"),p:S("с. Сагашили, Мугалжарский район","Сағашили а., Мұғалжар ауданы","Sagashili village, Mugalzhar district")},
+  {c:"urban",y:"2020",n:S("Благоустройство дворов мкр. «Молодежный»","«Молодежный» ш/а аулаларын абаттандыру","Courtyard landscaping, Molodezhny district"),p:S("г. Кандыагаш","Қандыағаш қ.","Kandyagash")}
+];
+
+const GAL = [
+  ["roads","roller_path",S("Укатка асфальтового покрытия","Асфальт жабынын тығыздау","Rolling fresh asphalt")],
+  ["roads","grader_gravel",S("Отсыпка и планировка щебня","Қиыршық тасты төсеу және тегістеу","Spreading and grading gravel")],
+  ["roads","paver_sidewalk",S("Укладка асфальта на тротуаре","Тротуарға асфальт төсеу","Laying asphalt on a sidewalk")],
+  ["roads","road_marking",S("Нанесение дорожной разметки","Жол таңбасын салу","Road marking")],
+  ["roads","road_patching",S("Ямочный ремонт автодороги","Автожолды шұңқырлы жөндеу","Pothole repair")],
+  ["roads","roller_yard",S("Уплотнение асфальтового основания во дворе","Аулада асфальт негізін тығыздау","Compacting a courtyard base")],
+  ["roads","roller_dusk",S("Уплотнение основания грунтовой дороги","Топырақ жол негізін тығыздау","Compacting a dirt road base")],
+  ["roads","grader_july",S("Грейдирование грунтовой дороги","Топырақ жолды грейдерлеу","Grading a dirt road")],
+  ["roads","dumptruck_steppe",S("Отсыпка грунтовой дороги","Топырақ жолды үйінділеу","Filling a dirt road")],
+  ["roads","trench_work",S("Земляные работы при ремонте автодороги","Автожолды жөндеу кезіндегі жер жұмыстары","Earthworks during road repair")],
+  ["roads","pipes",S("Монтаж водопропускных труб на автодороге","Автожолға су өткізгіш құбырлар орнату","Installing road culvert pipes")],
+  ["net","manhole_crane",S("Монтаж канализационных колодцев","Кәріз құдықтарын орнату","Installing sewer manholes")],
+  ["net","pipe_gauge",S("Опрессовка сетей водоснабжения","Су құбыры желілерін қысыммен сынау","Pressure testing a water main")],
+  ["net","manholes_field",S("Устройство железобетонных колодцев","Темірбетон құдықтарды орнату","Reinforced concrete wells")],
+  ["net","pipe_join",S("Сварка полиэтиленовых труб","Полиэтилен құбырларды дәнекерлеу","Welding polyethylene pipe")],
+  ["net","valve_pit",S("Монтаж запорной арматуры","Бекіткіш арматураны орнату","Installing shut-off valves")],
+  ["net","trench_pipe",S("Прокладка труб в траншее","Траншеяға құбыр төсеу","Laying pipe in a trench")],
+  ["net","trench_sand",S("Траншея для инженерных сетей","Инженерлік желілерге арналған траншея","Trench for utility lines")],
+  ["net","pole_drill2",S("Монтаж опор уличного освещения","Көше жарығы тіректерін орнату","Installing street light poles")],
+  ["net","pole_drill",S("Бурение под опоры электролинии","Электр желісінің тіректеріне бұрғылау","Drilling for power line poles")],
+  ["net","pole_install",S("Монтаж металлической опоры","Металл тіректі орнату","Erecting a steel tower")],
+  ["net","building_lights",S("Архитектурная подсветка здания","Ғимараттың сәулеттік жарығы","Architectural building lighting")],
+  ["park","promenade",S("Прогулочная аллея, с. Курык","Құрық а., серуен аллеясы","Promenade, Kuryk village")],
+  ["park","gazebo",S("Беседка и мощение плиткой","Беседка және плитка төсеу","Gazebo and paving")],
+  ["park","playground",S("Детская площадка","Балалар алаңы","Children's playground")],
+  ["park","bench",S("Малые архитектурные формы","Шағын сәулет формалары","Benches and street furniture")],
+  ["park","arch_gate",S("Благоустройство парковой аллеи","Саябақ аллеясын абаттандыру","Park alley landscaping")],
+  ["park","hedge_maze",S("Лабиринт из искусственного газона","Жасанды газоннан жасалған лабиринт","Artificial turf maze")],
+  ["park","sport_slab",S("Бетонное основание площадки","Алаңның бетон негізі","Concrete base for a sports ground")],
+  ["winter","snow_plow",S("Расчистка дороги от снега","Жолды қардан тазарту","Clearing snow from a road")],
+  ["winter","tractor_winter",S("Работа техники зимой","Техниканың қыстағы жұмысы","Machinery at work in winter")],
+  ["winter","snow_blade",S("Уборка снежных заносов","Қар үйінділерін тазалау","Clearing snowdrifts")]
+];
+
+const AW = [
+  ["aw_buran",S("Аким Мугалжарского района — за помощь в ликвидации бурана","Мұғалжар ауданының әкімі — боран салдарын жоюға көмектескені үшін","Akim of Mugalzhar district — for help during a blizzard"),"2024"],
+  ["aw_indep30",S("Аким Мугалжарского района — к 30-летию Независимости РК","Мұғалжар ауданының әкімі — ҚР Тәуелсіздігінің 30 жылдығына орай","Akim of Mugalzhar district — 30th anniversary of Independence"),"2021"],
+  ["aw_maslikhat",S("Секретарь Актюбинского областного маслихата","Ақтөбе облыстық мәслихатының хатшысы","Secretary of the Aktobe Regional Maslikhat"),"2019"],
+  ["aw_zhaidarman",S("Движение «Жайдарман» — за поддержку молодёжи","«Жайдарман» қозғалысы — жастарды қолдағаны үшін","Zhaidarman league — for supporting young people"),""],
+  ["aw_safety",S("Сертификат — курс «Охрана труда на предприятиях»","Сертификат — «Кәсіпорындардағы еңбекті қорғау» курсы","Certificate — occupational safety course"),""],
+  ["aw_judo",S("За поддержку турнира по дзюдо, с. Сагашили","Сағашили а. дзюдо турнирін қолдағаны үшін","For sponsoring a judo tournament, Sagashili"),""],
+  ["aw_boxing",S("За поддержку турнира Saunet Boxing","Saunet Boxing турнирін қолдағаны үшін","For sponsoring the Saunet Boxing tournament"),""],
+  ["aw_basshili",S("От жителей с. Басшили — за спонсорскую поддержку","Басшили а. тұрғындарынан — демеушілік көмегі үшін","From Basshili residents — for sponsorship"),""]
+];
+
+const ICO = {
+  truck:'<path d="M2 16V6h11v10M13 9h4l4 4v3h-8"/><circle class="acc" cx="6.5" cy="17.5" r="2"/><circle class="acc" cx="17.5" cy="17.5" r="2"/>',
+  clock:'<circle cx="12" cy="12" r="9"/><path class="acc" d="M12 7v5l3 2"/>',
+  coins:'<ellipse cx="9" cy="7" rx="6" ry="3"/><path d="M3 7v5c0 1.7 2.7 3 6 3s6-1.3 6-3V7"/><path class="acc" d="M15 11.5c3.3 0 6 1.3 6 3s-2.7 3-6 3-6-1.3-6-3"/>',
+  map:'<path d="M9 4 3 6v14l6-2 6 2 6-2V4l-6 2-6-2z"/><path class="acc" d="M9 4v14M15 6v14"/>',
+  cycle:'<path d="M20 12a8 8 0 1 1-2.3-5.7"/><path class="acc" d="M20 4v4h-4"/>',
+  shield:'<path d="M12 3 4 6v6c0 4.5 3.4 8 8 9 4.6-1 8-4.5 8-9V6l-8-3z"/><path class="acc" d="m8.5 12 2.5 2.5 4.5-5"/>'
+};
+const ADV = [
+  ["truck",S("Собственная техника","Өз техникамыз","Our own machinery"),S("Парк дорожно-строительной и грузовой техники","Жол-құрылыс және жүк техникасының паркі","A fleet of road-building and haul vehicles")],
+  ["clock",S("Соблюдение сроков","Мерзімді сақтау","On schedule"),S("Выполняем работы точно в срок без потери качества","Жұмыстарды сапасын төмендетпей, дер кезінде орындаймыз","Work delivered on time without cutting corners")],
+  ["coins",S("Гибкая ценовая политика","Икемді баға саясаты","Flexible pricing"),S("Условия, адаптированные под бюджет заказчика","Тапсырыс берушінің бюджетіне бейімделген шарттар","Terms adapted to the client's budget")],
+  ["map",S("География работ","Жұмыс географиясы","Wide reach"),S("Опыт в разных районах и областях Казахстана","Қазақстанның түрлі аудандары мен облыстарындағы тәжірибе","Experience across districts and regions of Kazakhstan")],
+  ["cycle",S("Полный цикл работ","Жұмыстың толық циклі","Full cycle"),S("От ремонта и строительства до содержания объектов","Жөндеу мен құрылыстан нысандарды күтіп ұстауға дейін","From repair and construction to long-term upkeep")],
+  ["shield",S("Ответственность","Жауапкершілік","Accountability"),S("Соответствие казахстанским нормативам и стандартам","Қазақстандық нормативтер мен стандарттарға сәйкестік","Compliance with Kazakhstan's codes and standards")]
+];
+
+let lang = "ru", prjF = "all", galF = "all", lbList = [], lbIdx = 0;
+const $ = s => document.querySelector(s);
+const esc = s => String(s).replace(/[&<>"]/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+
+function chips(el, items, cur, onPick){
+  el.innerHTML = items.map(([k,lab]) => `<button type="button" class="chip" data-k="${k}" aria-pressed="${k===cur}">${esc(T[lab][lang])}</button>`).join("");
+  el.querySelectorAll(".chip").forEach(b => b.onclick = () => onPick(b.dataset.k));
+}
+
+function render(){
+  document.documentElement.lang = lang === "kz" ? "kk" : lang;
+  document.querySelectorAll("[data-t]").forEach(el => { const v = T[el.dataset.t]; if (v) el.textContent = v[lang]; });
+  document.querySelectorAll(".langs button").forEach(b => b.setAttribute("aria-pressed", b.dataset.lang === lang));
+  $("#lb-x").setAttribute("aria-label", T.close[lang]);
+
+  $("#svc").innerHTML = SVC.map((s,i) => `<article class="svc"><img src="img/${s.img}.jpg" alt="${esc(s.t[lang])}" loading="lazy"><div><span class="k">0${i+1}</span><h3>${esc(s.t[lang])}</h3><p>${esc(s.d[lang])}</p></div></article>`).join("");
+
+  chips($("#prj-filters"), [["all","all"],["roads","fRoads"],["urban","fUrban"]], prjF, k => { prjF = k; render(); });
+  $("#ledger").innerHTML = PRJ.filter(p => prjF==="all" || p.c===prjF).map(p =>
+    `<div class="row"><span class="yr">${p.y}</span><div class="nm"><h3>${esc(p.n[lang])}</h3><small>${esc(p.p[lang])}</small></div></div>`).join("");
+
+  chips($("#gal-filters"), [["all","all"],["roads","gRoads"],["net","gNet"],["park","gPark"],["winter","gWinter"]], galF, k => { galF = k; render(); });
+  const g = GAL.filter(x => galF==="all" || x[0]===galF);
+  $("#gal").innerHTML = g.map((x,i) => `<button type="button" class="g-item" data-i="${i}"><img src="img/${x[1]}.jpg" alt="${esc(x[2][lang])}" loading="lazy"><span>${esc(x[2][lang])}</span></button>`).join("");
+  const gList = g.map(x => ["img/"+x[1]+".jpg", x[2][lang]]);
+  $("#gal").querySelectorAll(".g-item").forEach(b => b.onclick = () => openLb(gList, +b.dataset.i));
+
+  $("#adv").innerHTML = ADV.map(a => `<div class="adv"><svg viewBox="0 0 24 24" aria-hidden="true" stroke-linecap="round" stroke-linejoin="round">${ICO[a[0]]}</svg><h3>${esc(a[1][lang])}</h3><p>${esc(a[2][lang])}</p></div>`).join("");
+
+  $("#awards").innerHTML = AW.map((a,i) => `<button type="button" class="aw" data-i="${i}"><div class="ph"><img src="img/${a[0]}.jpg" alt="${esc(a[1][lang])}" loading="lazy"></div><p>${esc(a[1][lang])}${a[2]?`<em>${a[2]}</em>`:""}</p></button>`).join("");
+  const aList = AW.map(a => ["img/"+a[0]+".jpg", a[1][lang]]);
+  $("#awards").querySelectorAll(".aw").forEach(b => b.onclick = () => openLb(aList, +b.dataset.i));
+
+  const lp = [1,2,3,4].map(n => ["img/lic"+n+".jpg", `${T.licShort[lang]} ГСЛ №03831 · ${n}/4`]);
+  $("#licpages").innerHTML = lp.map((l,i) => `<button type="button" class="aw" data-i="${i}" aria-label="${esc(l[1])}"><div class="ph"><img src="${l[0]}" alt="" loading="lazy"></div></button>`).join("");
+  $("#licpages").querySelectorAll(".aw").forEach(b => b.onclick = () => openLb(lp, +b.dataset.i));
+}
+
+function openLb(list, i){ lbList = list; lbIdx = i; showLb(); $("#lb").hidden = false; $("#lb-x").focus(); }
+function showLb(){ const [src,cap] = lbList[lbIdx]; $("#lb-img").src = src; $("#lb-img").alt = cap; $("#lb-cap").textContent = cap; const multi = lbList.length > 1; $("#lb-pv").hidden = !multi; $("#lb-nx").hidden = !multi; }
+function step(d){ lbIdx = (lbIdx + d + lbList.length) % lbList.length; showLb(); }
+$("#lb-x").onclick = () => { $("#lb").hidden = true; };
+$("#lb-pv").onclick = () => step(-1);
+$("#lb-nx").onclick = () => step(1);
+$("#lb").addEventListener("click", e => { if (e.target.id === "lb") $("#lb").hidden = true; });
+document.addEventListener("keydown", e => {
+  if ($("#lb").hidden) return;
+  if (e.key === "Escape") $("#lb").hidden = true;
+  if (e.key === "ArrowLeft") step(-1);
+  if (e.key === "ArrowRight") step(1);
+});
+
+document.querySelectorAll(".langs button").forEach(b => b.onclick = () => {
+  lang = b.dataset.lang; try { localStorage.setItem("kp-lang", lang); } catch(e) {}
+  render();
+});
+
+document.addEventListener("click", async e => {
+  const b = e.target.closest(".copy"); if (!b) return;
+  const text = b.dataset.copy || T[b.dataset.copyt][lang];
+  try { await navigator.clipboard.writeText(text); b.textContent = T.copied[lang]; }
+  catch(err) { const dd = b.previousElementSibling; const r = document.createRange(); r.selectNodeContents(dd); const s = getSelection(); s.removeAllRanges(); s.addRange(r); }
+  setTimeout(() => { b.textContent = T.copy[lang]; }, 1600);
+});
+
+(function init(){
+  const h = (location.hash || "").slice(1);
+  if (["kz","ru","en"].includes(h)) lang = h;
+  else { try { const s = localStorage.getItem("kp-lang"); if (["kz","ru","en"].includes(s)) lang = s; } catch(e) {} }
+  render();
+})();
+</script>
+
+</body>
+</html>
